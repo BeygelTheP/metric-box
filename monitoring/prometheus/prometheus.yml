@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "rules/*.yml"
+
+scrape_configs:
+  - job_name: 'metricbox-services'
+    static_configs:
+      - targets: 
+        - 'metricbox-event-ingestion:8080'
+        - 'metricbox-query-service:8080'
+        - 'metricbox-user-management:8080'
+        - 'metricbox-dashboard-service:8080'
+        - 'metricbox-notification-service:8080'
+        - 'metricbox-api-gateway:8080'
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+
+  - job_name: 'metricbox-infrastructure'
+    static_configs:
+      - targets:
+        - 'metricbox-postgresql:5432'
+        - 'metricbox-clickhouse:8123'
+        - 'metricbox-redis:6379'

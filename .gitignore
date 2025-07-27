@@ -1,0 +1,57 @@
+# Rust
+target/
+Cargo.lock
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.pdb
+
+# Environment files
+.env
+.env.development
+.env.staging
+.env.production
+
+# MetricBox data directories
+data/postgresql/
+data/clickhouse/
+data/redis/
+data/prometheus/
+data/grafana/
+
+# Logs
+logs/
+*.log
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing results
+testing/load-testing/results/
+coverage/
+
+# Terraform (if using cloud deployment)
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Build artifacts
+*.exe
+
+# Temporary
+tmp/
+temp/
