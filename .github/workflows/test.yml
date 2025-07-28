@@ -1,0 +1,30 @@
+name: MetricBox Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-rust:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - name: Run Rust tests
+      run: |
+        cd services/event-ingestion && cargo test
+        cd ../query-service && cargo test
+        cd ../data-generator && cargo test
+
+  test-dotnet:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    - name: Run .NET tests
+      run: |
+        find services -name "*.csproj" -exec dotnet test {} \;
