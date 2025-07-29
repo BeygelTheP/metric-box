@@ -1,8 +1,4 @@
-# Detect Docker Compose command
-DOCKER_COMPOSE := $(shell command -v docker-compose 2> /dev/null)
-ifndef DOCKER_COMPOSE
-	DOCKER_COMPOSE := docker compose
-endif
+DOCKER_COMPOSE := docker compose
 
 .PHONY: help setup demo test load-test build clean
 

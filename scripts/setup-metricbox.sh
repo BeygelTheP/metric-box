@@ -3,7 +3,7 @@ echo "🚀 Setting up MetricBox development environment..."
 
 # Check prerequisites
 command -v docker >/dev/null 2>&1 || { echo "❌ Docker is required but not installed."; exit 1; }
-command -v docker-compose >/dev/null 2>&1 || { echo "❌ Docker Compose is required but not installed."; exit 1; }
+command -v docker compose >/dev/null 2>&1 || { echo "❌ Docker Compose is required but not installed."; exit 1; }
 
 echo "✅ Prerequisites check passed"
 

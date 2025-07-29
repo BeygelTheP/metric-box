@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build MetricBox services
-      run: docker-compose build
+      run: docker compose build

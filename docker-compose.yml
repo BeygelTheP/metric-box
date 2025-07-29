@@ -42,7 +42,8 @@ services:
 
   # MetricBox Core Services
   metricbox-event-ingestion:
-    build: ./services/event-ingestion
+    build: 
+      context: ./services/event-ingestion
     container_name: metricbox-event-ingestion
     ports:
       - "8081:8080"
@@ -61,7 +62,8 @@ services:
       - ./logs:/app/logs
 
   metricbox-query-service:
-    build: ./services/query-service
+    build: 
+      context: ./services/query-service
     container_name: metricbox-query-service
     ports:
       - "8082:8080"
@@ -76,7 +78,8 @@ services:
       - SERVICE_NAME=metricbox-query-service
 
   metricbox-user-management:
-    build: ./services/user-management
+    build: 
+      context: ./services/user-management
     container_name: metricbox-user-management
     ports:
       - "8083:8080"
@@ -88,7 +91,8 @@ services:
       - SERVICE_NAME=metricbox-user-management
 
   metricbox-dashboard-service:
-    build: ./services/dashboard-service
+    build: 
+      context: ./services/dashboard-service
     container_name: metricbox-dashboard-service
     ports:
       - "8084:8080"
@@ -100,7 +104,8 @@ services:
       - SERVICE_NAME=metricbox-dashboard-service
 
   metricbox-notification-service:
-    build: ./services/notification-service
+    build: 
+      context: ./services/notification-service
     container_name: metricbox-notification-service
     ports:
       - "8085:8080"
@@ -115,7 +120,8 @@ services:
       - SERVICE_NAME=metricbox-notification-service
 
   metricbox-api-gateway:
-    build: ./services/api-gateway
+    build: 
+      context: ./services/api-gateway
     container_name: metricbox-api-gateway
     ports:
       - "8080:8080"
@@ -132,7 +138,8 @@ services:
       - SERVICE_NAME=metricbox-api-gateway
 
   metricbox-data-generator:
-    build: ./services/data-generator
+    build: 
+      context: ./services/data-generator
     container_name: metricbox-data-generator
     depends_on:
       - metricbox-event-ingestion
