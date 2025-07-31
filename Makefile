@@ -17,7 +17,7 @@ demo: ## Start the full MetricBox demo environment
 	@echo "🔨 Building services first..."
 	@$(DOCKER_COMPOSE) build
 	@echo "🚀 Starting services..."
-	@$(DOCKER_COMPOSE) up -d
+	@$(DOCKER_COMPOSE) --env-file .env up -d
 	@echo "⏳ Waiting for MetricBox services to start..."
 	@sleep 10
 	@./scripts/start-demo.sh

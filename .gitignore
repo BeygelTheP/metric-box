@@ -13,9 +13,11 @@ obj/
 
 # Environment files
 .env
-.env.development
-.env.staging
-.env.production
+.env.*
+!.env.example
+
+# Dev related 
+Dev
 
 # MetricBox data directories
 data/postgresql/
