@@ -2,7 +2,7 @@ name: Build MetricBox
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   build:
