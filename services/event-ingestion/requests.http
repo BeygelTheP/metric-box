@@ -1,8 +1,9 @@
-GET http://localhost:8080/health
+
+
+GET http://localhost:8081/health
 
 ###
-
-POST http://localhost:8080/api/events
+POST http://localhost:8081/api/events
 Content-Type: application/json
 
 {
@@ -10,9 +11,28 @@ Content-Type: application/json
 }
 
 ###
-
 POST http://localhost:9090/admin/tenant/1234
 
 ###
-
 DELETE http://localhost:9090/admin/tenant/1234
+
+####################### Clickhouse
+@user = default
+@pass = 
+@base64Auth = {{user}}:{{pass}}
+
+###
+GET http://localhost:8123/ping
+Authorization: Basic {{base64Auth}}
+
+###
+GET http://localhost:8123/?query=SHOW USERS
+Authorization: Basic {{base64Auth}}
+
+###
+GET http://localhost:8123/?query=SHOW TABLES
+Authorization: Basic {{base64Auth}}
+
+###
+GET http://localhost:8123/?query=SELECT currentUser();
+Authorization: Basic {{base64Auth}}

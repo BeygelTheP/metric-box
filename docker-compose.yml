@@ -25,11 +25,11 @@ services:
       - "8123:8123"
       - "9000:9000"
     volumes:
-      - ./data/clickhouse:/var/lib/clickhouse
+      - ./data/clickhouse:/var/lib/clickhouse      
+      - ./.build/custom-users.xml:/etc/clickhouse-server/users.d/custom-users.xml:ro
     environment:
-      CLICKHOUSE_DB: metricbox
-      CLICKHOUSE_USER: metricbox
-      CLICKHOUSE_PASSWORD: mtrboxpass
+      CLICKHOUSE_DB: metricbox      
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
 
   metricbox-redis:
     image: redis:7-alpine
@@ -46,18 +46,22 @@ services:
       context: ./services/event-ingestion
     container_name: metricbox-event-ingestion
     ports:
-      - "8081:8080"
+      - "8081:${CLICKHOUSE_PUB_PORT}"
+      - "9090:9090"
     depends_on:
       metricbox-clickhouse:
         condition: service_started
       metricbox-redis:
         condition: service_started
     environment:
-      - CLICKHOUSE_CONNECTION=http://metricbox:mtrboxpass@metricbox-clickhouse:8123/metricbox
-      - REDIS_URL=redis://metricbox-redis:6379
-      - SERVICE_NAME=metricbox-event-ingestion
-      - PUBLIC_PORT=8080
-      - ADMIN_PORT=9090
+      SERVICE_NAME: metricbox-event-ingestion
+      REDIS_URL: redis://metricbox-redis:6379
+      CLICKHOUSE_URL: metricbox-clickhouse:8123
+      CLICKHOUSE_DB: metricbox      
+      CLICKHOUSE_PUB_USER_PWD: ${CLICKHOUSE_PUB_USER_PWD}
+      CLICKHOUSE_PUB_PORT: ${CLICKHOUSE_PUB_PORT}
+      CLICKHOUSE_ADMIN_USER_PWD: ${CLICKHOUSE_ADMIN_USER_PWD}
+      CLICKHOUSE_ADMIN_PORT: ${CLICKHOUSE_ADMIN_PORT}
     volumes:
       - ./logs:/app/logs
 

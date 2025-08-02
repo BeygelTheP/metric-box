@@ -1,6 +1,6 @@
 DOCKER_COMPOSE := docker compose
 
-.PHONY: help setup demo test load-test build clean
+.PHONY: help setup demo test load-test build clean logs
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -41,10 +41,11 @@ clean: ## Clean up MetricBox containers and volumes
 	@echo "🧹 Cleaning up MetricBox..."
 	@$(DOCKER_COMPOSE) down -v
 	@docker system prune -f
+	@docker volume prune -f
 	@echo "✅ MetricBox cleanup complete"
 
 logs: ## Show logs for all MetricBox services
 	@$(DOCKER_COMPOSE) logs -f
 
 status: ## Show status of all MetricBox services
-	@$(DOCKER_COMPOSE) ps
+	@$(DOCKER_COMPOSE) ps --format "table {{.Name}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"

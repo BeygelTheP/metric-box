@@ -53,6 +53,7 @@ coverage/
 
 # Build artifacts
 *.exe
+.build/
 
 # Temporary
 tmp/

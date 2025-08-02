@@ -67,8 +67,8 @@ async fn start_admin_service(port: u16, app_context: &Arc<AppContext>) -> anyhow
 }
 
 fn get_ports() -> Ports {
-    const PUBLIC_PORT_ENV_NAME: &str = "PUBLIC_PORT";
-    const ADMIN_PORT_ENV_NAME: &str = "ADMIN_PORT";
+    const PUBLIC_PORT_ENV_NAME: &str = "CLICKHOUSE_PUB_PORT";
+    const ADMIN_PORT_ENV_NAME: &str = "CLICKHOUSE_ADMIN_PORT";
 
     let public_port = get_port_from_env(PUBLIC_PORT_ENV_NAME).inspect_err(|err| {
         eprintln!(

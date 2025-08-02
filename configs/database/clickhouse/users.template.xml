@@ -1,0 +1,27 @@
+<clickhouse>
+    <users>
+        <admin>
+            <password>${CLICKHOUSE_ADMIN_USER_PWD}</password>
+            <profile>default</profile>
+            <quota>default</quota>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <grants>
+                <query>GRANT ALL ON *.*</query>
+            </grants>
+        </admin>
+
+        <read_write>
+            <password>${CLICKHOUSE_PUB_USER_PWD}</password>
+            <profile>default</profile>
+            <quota>default</quota>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <grants>
+                <query>GRANT INSERT, SELECT ON metricbox.*</query>
+            </grants>
+        </read_write>
+    </users>
+</clickhouse>
