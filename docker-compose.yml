@@ -27,6 +27,7 @@ services:
     volumes:
       - ./data/clickhouse:/var/lib/clickhouse      
       - ./.build/custom-users.xml:/etc/clickhouse-server/users.d/custom-users.xml:ro
+      - ./configs/database/clickhouse/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     environment:
       CLICKHOUSE_DB: metricbox      
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
@@ -56,7 +57,7 @@ services:
     environment:
       SERVICE_NAME: metricbox-event-ingestion
       REDIS_URL: redis://metricbox-redis:6379
-      CLICKHOUSE_URL: metricbox-clickhouse:8123
+      CLICKHOUSE_URL: http://metricbox-clickhouse:8123
       CLICKHOUSE_DB: metricbox      
       CLICKHOUSE_PUB_USER_PWD: ${CLICKHOUSE_PUB_USER_PWD}
       CLICKHOUSE_PUB_PORT: ${CLICKHOUSE_PUB_PORT}

@@ -30,7 +30,15 @@ GET http://localhost:8123/?query=SHOW USERS
 Authorization: Basic {{base64Auth}}
 
 ###
-GET http://localhost:8123/?query=SHOW TABLES
+POST http://localhost:8123/?query=CREATE TABLE metricbox.events_tenant_123 AS metricbox.events_template
+Authorization: Basic {{base64Auth}}
+
+###
+POST http://localhost:8123/?query=DROP TABLE IF EXISTS metricbox.events_tenant_123
+Authorization: Basic {{base64Auth}}
+
+###
+GET http://localhost:8123/?query=SHOW TABLES IN metricbox
 Authorization: Basic {{base64Auth}}
 
 ###
