@@ -8,7 +8,7 @@ pub async fn create_tenant(
     Path(id): Path<String>,
 ) -> impl IntoResponse {
     let client = Arc::clone(&(app_context));
-    match clickhouse_tenants::add_tenant_table(&client.public_clickhouse_client, &id).await {
+    match clickhouse_tenants::add_tenant_table(&client.admin_clickhouse_client, &id).await {
         Ok(_) => StatusCode::OK,
         Err(err) => {
             eprintln!("Failed to add event. {}", err);
@@ -22,7 +22,7 @@ pub async fn delete_tenant(
     Path(id): Path<String>,
 ) -> impl IntoResponse {
     let client = Arc::clone(&(app_context));
-    match clickhouse_tenants::delete_tenant_table(&client.public_clickhouse_client, &id).await {
+    match clickhouse_tenants::delete_tenant_table(&client.admin_clickhouse_client, &id).await {
         Ok(_) => StatusCode::OK,
         Err(err) => {
             eprintln!("Failed to add event. {}", err);

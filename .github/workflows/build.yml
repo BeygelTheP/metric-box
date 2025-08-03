@@ -6,8 +6,13 @@ on:
 
 jobs:
   build:
+    environment: dev
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: Build MetricBox services
+      env:
+        CLICKHOUSE_PUB_USER_PWD: ${{ secrets.CLICKHOUSE_PUB_USER_PWD }}
+        CLICKHOUSE_ADMIN_USER_PWD: ${{ secrets.CLICKHOUSE_ADMIN_USER_PWD }}
       run: docker compose build
+      

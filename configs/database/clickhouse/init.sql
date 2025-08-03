@@ -1,3 +1,5 @@
+-- This file is mounted in clickhouse container and used for first init
+
 CREATE DATABASE IF NOT EXISTS metricbox;
 
 USE metricbox;
